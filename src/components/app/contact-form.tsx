@@ -9,6 +9,7 @@ import { z } from 'zod';
 const contactFormSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters long' }),
   email: z.string().email({ message: 'Invalid email address' }),
+  botMessage: z.string(),
   message: z.string().min(10, { message: 'Message must be at least 10 characters long' }),
 });
 
@@ -18,11 +19,18 @@ export function ContactForm() {
     defaultValues: {
       name: '',
       email: '',
+      botMessage: '',
       message: '',
     },
   });
 
   async function onSubmit(values: z.infer<typeof contactFormSchema>) {
+    // if bot message is provided, do not send the form
+    if (values.botMessage.length > 0) {
+      console.log('botMessage', values.botMessage);
+      return;
+    }
+
     const FORM_ACTION = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLScOvDtnVWQT0QSv04R2DOh2I7iGawNRnVTLA7SbB50nRcGo3Q/formResponse';
 
     const formData = new FormData();
@@ -61,6 +69,19 @@ export function ContactForm() {
               <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input placeholder='Enter your email' autoComplete='off' {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name='botMessage'
+          render={({ field }) => (
+            <FormItem className='invisible size-0 !mt-0'>
+              <FormLabel>Bot message</FormLabel>
+              <FormControl>
+                <Input placeholder='Enter your bot message' className='resize-y' autoComplete='off' {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
