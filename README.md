@@ -1,4 +1,4 @@
-## 🤘 React Foogle Forms Kit
+## 🤘 React Google Form Kit
 A react app used to submit google forms using the html form actions.
 
 #### The Stack includes
@@ -12,7 +12,7 @@ A react app used to submit google forms using the html form actions.
 - [pnpm](https://pnpm.io/) as fast, efficient package-manager
 
 #### Installation
-1. Clone the repository ```git clone https://github.com/rahu1gg/react-google-forms.git```
+1. Clone the repository ```git clone https://github.com/rahulpeacock/react-google-forms.git```
 2. Navigate to the directory ```cd react-google-forms```
 3. Install dependencies ```pnpm install```
 4. Starting the development server ```pnpm dev```
